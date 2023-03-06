@@ -1,20 +1,28 @@
 package com.example.demo.entites;
 
-import java.util.Date;
+public class CorporateCustomerReg {
 
-public class CustomerReg {
-	
-	String firstname;
-	String lastname;
-	String email;
-	String password;
-	String ans;
-	Date dob;
-	String contactno;
-	String addressline;
+	int corporateid;
+    String companyname;
+    String email;
+    String password;
+    String regno;
+    String contactno;
+    String addressline;
 	int securityid, areaid;
+	String ans;
 	
 	
+	public String getAns() {
+		return ans;
+	}
+
+
+	public void setAns(String ans) {
+		this.ans = ans;
+	}
+
+
 	public int getSecurityid() {
 		return securityid;
 	}
@@ -33,98 +41,50 @@ public class CustomerReg {
 	public void setAreaid(int areaid) {
 		this.areaid = areaid;
 	}
-
-
+	public int getCorporateid() {
+		return corporateid;
+	}
+	public void setCorporateid(int corporateid) {
+		this.corporateid = corporateid;
+	}
+	public String getCompanyname() {
+		return companyname;
+	}
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
+	}
 	public String getEmail() {
 		return email;
 	}
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	public String getPassword() {
 		return password;
 	}
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-
-	
-	
-	public CustomerReg() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getRegno() {
+		return regno;
 	}
-
-
-
-	public String getFirstname() {
-		return firstname;
+	public void setRegno(String regno) {
+		this.regno = regno;
 	}
-
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-
-	public String getLastname() {
-		return lastname;
-	}
-
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-
-	public Date getDob() {
-		return dob;
-	}
-
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-
 	public String getContactno() {
 		return contactno;
 	}
-
-
 	public void setContactno(String contactno) {
 		this.contactno = contactno;
 	}
-
-
 	public String getAddressline() {
 		return addressline;
 	}
-
-
 	public void setAddressline(String addressline) {
 		this.addressline = addressline;
 	}
-
-
-	public String getAns() {
-		return ans;
-	}
-
-
-	public void setAns(String ans) {
-		this.ans = ans;
-	}
-
-
+    
 	
-
+	
+	
 }

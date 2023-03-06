@@ -1,12 +1,6 @@
 package com.example.demo.controllers;
 
-
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,27 +9,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entites.Area;
-
+import com.example.demo.entites.CorporateCustomer;
+import com.example.demo.entites.CorporateCustomerReg;
 import com.example.demo.entites.Login;
 import com.example.demo.entites.Question;
 import com.example.demo.entites.Role;
 import com.example.demo.entites.Vendor;
 import com.example.demo.entites.VendorReg;
 import com.example.demo.services.AreaService;
-
+import com.example.demo.services.CorporateCustomerService;
 import com.example.demo.services.LoginService;
 import com.example.demo.services.QuestionService;
 import com.example.demo.services.RoleService;
-import com.example.demo.services.VendorService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
-public class VendorController {
+public class CorporateCustomerController {
+     
 	@Autowired
-	VendorService vservice;
+	CorporateCustomerService cservice;
 	
 	@Autowired
 	LoginService lservice;
+	
 	
 	@Autowired
 	RoleService rservice;
@@ -46,41 +42,30 @@ public class VendorController {
 	@Autowired
 	AreaService aservice;
 	
-	
-
-	
-	
-	@GetMapping("/getVendor")
-	public Vendor getVendor(@RequestParam("loginid") int vloginid ) {
+	@GetMapping("/getCorporateCustomer")
+	public CorporateCustomer getCorporateCustomer(@RequestParam("loginid") int vloginid ) {
 		Login l = lservice.getbyId(vloginid);
-		return vservice.getVendor(l);	
+		return cservice.getCorporateCustomer(l);
+				
 	}
+	 
 	
-	@GetMapping("/getAllVendor")
-	public List<Vendor> getAllVendor()
+	@PostMapping("/regCorporateCustomer")
+	public CorporateCustomer regCorporateCustomer(@RequestBody CorporateCustomerReg cr)
 	{
+		Role r = rservice.getRole(3);
+		Question q = qservice.getQue(cr.getSecurityid());
 		
-		return vservice.getAllVendor();
-		
-	}
-	
-	
-	@PostMapping("/regVendor")
-	public Vendor regVendor(@RequestBody VendorReg v)
-	{
-		System.out.println(v);
-		Role r = rservice.getRole(2);
-		Question q = qservice.getQue(v.getSecurityid());
-		
-		
-		Login l = new Login(v.getEmail(),v.getPassword(),v.getAns(),q,r,true);
+		Login l = new Login(cr.getEmail(),cr.getPassword(),cr.getAns(),q,r,true);
 		Login saved = lservice.Save(l);
 		
-	    Area a = aservice.getArea(v.getAreaid()) ;
+	    Area a = aservice.getArea(cr.getAreaid()) ;
 	    
-		Vendor vn = new Vendor(v.getShopname(),v.getLicence_no(),v.getContactno(),false,v.getAddressline(),a,saved);
-		return vservice.Save(vn);
+	    CorporateCustomer cc = new CorporateCustomer(cr.getCompanyname(),cr.getRegno(),cr.getContactno(),cr.getAddressline(),a,saved);
+		return cservice.Save(cc);
 				
 				
 	}
+	
+	
 }
