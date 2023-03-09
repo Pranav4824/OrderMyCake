@@ -35,4 +35,22 @@ public class ProductService {
 		return prepo.findAll();
 	}
 	
+	
+	public List<Product> getProductsByVendor(int id)
+	{
+		return prepo.getProductsByVendor(id);
+	}
+	
+	public List<Product> getProductsbyFlavor(int id)
+	{
+		return prepo.getProductsbyFlavor(id);
+	}
+	
+	public void deleteProduct(int productid)
+	{
+		 prepo.deleteById(productid);;
+	}
+	
+	
+	
 }

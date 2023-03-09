@@ -8,14 +8,31 @@ public class AddProduct {
 	double weight;
 	byte image;
 	boolean eggeggless;
-	String description;
-	
+	String description;	
 	int flavorid;
 	int shapeid;
 	int cakeid;
 	int vendorid;
 	
 
+	public AddProduct() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public AddProduct(String productname, double price, double weight, byte image, boolean eggeggless,
+			String description, int flavorid, int shapeid, int cakeid, int vendorid) {
+		super();
+		this.productname = productname;
+		this.price = price;
+		this.weight = weight;
+		this.image = image;
+		this.eggeggless = eggeggless;
+		this.description = description;
+		this.flavorid = flavorid;
+		this.shapeid = shapeid;
+		this.cakeid = cakeid;
+		this.vendorid = vendorid;
+	}
 	public int getVendorid() {
 		return vendorid;
 	}

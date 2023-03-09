@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,14 +53,14 @@ public class ProductController {
 	@PostMapping("/addProduct")
 	public Product addProduct(@RequestBody AddProduct p)
 	{
+		System.out.println(p);
+		
 		Shape s = sservice.getShapeById(p.getShapeid());
 		
 		Flavor f = fservice.getFlavorById(p.getFlavorid());
 		
 		CakeType ct = ctservice.getCakeTypeById(p.getCakeid());
-		
-	
-		
+	        
 		Vendor v= vservice.getVen(p.getVendorid());
 		
 		Product pp = new Product(p.getProductname(),p.getPrice(),p.getWeight(),p.isEggeggless(),p.getDescription(),s,f,v,ct);
@@ -91,6 +93,29 @@ public class ProductController {
 	public List <Product> getAllProduct()
 	{
 		return pservice.getAllProduct();
+	}
+	
+	@GetMapping("/getProducts")
+	public List<Product> getProductsByVendor(@RequestParam("pvendorid")int vendorid)
+	{
+		System.out.println(vendorid);
+		return pservice.getProductsByVendor(vendorid);
+	}
+	
+	@GetMapping("/getProductsbyFlavor")
+	public List<Product> getProductsbyFlavor(@RequestParam("flavorid")int flavorid)
+	{
+		//System.out.println(vendorid);
+		return pservice.getProductsbyFlavor(flavorid);
+	}
+	
+	
+	@DeleteMapping("/deleteProduct")
+	public void deleteProduct(@RequestParam("productid")int productid)
+	{
+		
+		 pservice.deleteProduct(productid);
+		
 	}
 	
 

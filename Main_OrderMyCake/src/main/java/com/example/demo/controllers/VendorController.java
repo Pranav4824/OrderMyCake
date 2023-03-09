@@ -1,8 +1,7 @@
 package com.example.demo.controllers;
 
-
-
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,9 +47,6 @@ public class VendorController {
 	AreaService aservice;
 	
 	
-
-	
-	
 	@GetMapping("/getVendor")
 	public Vendor getVendor(@RequestParam("loginid") int vloginid ) {
 		Login l = lservice.getbyId(vloginid);
@@ -59,10 +56,39 @@ public class VendorController {
 	@GetMapping("/getAllVendor")
 	public List<Vendor> getAllVendor()
 	{
-		
 		return vservice.getAllVendor();
 		
 	}
+	
+	@GetMapping("/getVendorApprovalChecklist")
+	public List<Vendor> getUnapprovedVendor()
+	{
+		return vservice.getUnapprovedVendor();
+	}
+	
+	
+	@GetMapping("/getApprovedVendor")
+	public List<Vendor> getapprovedlist()
+	{
+		return vservice.getapprovedlist();
+	}
+	
+	@GetMapping("/approve")
+	public boolean approveVendor(@RequestParam("vendorid") int vendorid)
+	{
+		Vendor v=vservice.getVendorById(vendorid);
+		v.getVloginid().setStatus(true);
+		Vendor c= vservice.registerVendor(v);
+		return c.getVloginid().isStatus();
+	
+		
+	}
+	
+	@GetMapping("/getVendorByid")
+	  public Vendor getVendorById(@RequestParam("vendorid") int vendorid)
+	  {
+		return vservice.getVendorById(vendorid);
+	  }
 	
 	
 	@PostMapping("/regVendor")
@@ -73,7 +99,7 @@ public class VendorController {
 		Question q = qservice.getQue(v.getSecurityid());
 		
 		
-		Login l = new Login(v.getEmail(),v.getPassword(),v.getAns(),q,r,true);
+		Login l = new Login(v.getEmail(),v.getPassword(),v.getAns(),q,r,false);
 		Login saved = lservice.Save(l);
 		
 	    Area a = aservice.getArea(v.getAreaid()) ;

@@ -20,7 +20,7 @@ public class Product {
 	String productname;
 	double price;
 	double weight;
-	byte image;
+	byte [] image;
 	boolean eggeggless;
 	String description;
 	
@@ -100,11 +100,11 @@ public class Product {
 		this.weight = weight;
 	}
 
-	public byte getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(byte image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

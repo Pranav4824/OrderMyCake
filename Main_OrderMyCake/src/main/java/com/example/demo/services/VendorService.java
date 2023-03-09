@@ -28,6 +28,35 @@ public class VendorService {
 		return vrepo.findById(id).get();
 	}
 	
+	public List<Vendor> getUnapprovedVendor()
+	{
+		return vrepo.getUnapprovedVendor();
+	}
+	
+	public List<Vendor> getapprovedlist()
+	{
+		return vrepo.getapprovedlist();
+	}
+	
+	public void setApproval()
+	{
+		
+	}
+	
+	
+	public Vendor registerVendor(Vendor v)
+	{
+		return vrepo.save(v);
+	}
+	
+	public Vendor getVendorById(int vendorid)
+	{
+		return vrepo.findById(vendorid).get();
+	}
+	
+	
+	
+	
 	public List<Vendor> getAllVendor()
 	{
 		return vrepo.findAll();
